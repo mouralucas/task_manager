@@ -13,7 +13,9 @@ class CreateTaskResponse(BaseModel):
     task: TaskSchema = Field(..., description="The task created")
 
 
-class UpdateTaskResponse(BaseModel):
+class CompleteTaskResponse(CreateTaskResponse):
+    # It is the same as create task
+    # I create a new one just to maintain the naming pattern for every call
     pass
 
 

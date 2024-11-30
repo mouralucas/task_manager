@@ -3,8 +3,8 @@ from fastapi.params import Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 from starlette import status
 
-from schemas.request.task import CreateTaskRequest, DeleteTaskRequest
-from schemas.response.task import CreateTaskResponse, DeleteTaskResponse, GetTaskResponse
+from schemas.request.task import CreateTaskRequest, DeleteTaskRequest, CompleteTaskRequest
+from schemas.response.task import CreateTaskResponse, DeleteTaskResponse, GetTaskResponse, CompleteTaskResponse
 from backend.database import get_session
 from services.task import TaskService
 
@@ -19,13 +19,12 @@ async def create_new_task(
     return await TaskService(session=session).create_task(task=task)
 
 
-@router.patch('', summary='Update a task', status_code=status.HTTP_200_OK)
-async def update_task(
-        task: CreateTaskRequest,
+@router.patch('/complete', summary='Mark a task as completed')
+async def complete_task(
+        task: CompleteTaskRequest,
         session: AsyncSession = Depends(get_session),
-):
-    pass
-
+) -> CompleteTaskResponse:
+    return await TaskService(session=session).complete_task(task=task)
 
 @router.delete('', summary='Delete a task')
 async def delete_task(

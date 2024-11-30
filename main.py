@@ -14,7 +14,7 @@ from sqlalchemy.dialects.postgresql import insert as pg_insert
 async def lifespan(app: FastAPI):
     await sessionmanager.init_database()
 
-    # add task status
+    # Create the tables in database and insert basic status data
     async with sessionmanager.session() as session:
         status_list = [
             {
@@ -22,6 +22,13 @@ async def lifespan(app: FastAPI):
                 'name': 'Ativo',
                 'description': 'Tarefa ativa',
             },
+
+            {
+                'id': uuid.UUID('217211e9-adb2-4d6a-a200-6efa38375320'),
+                'name': 'Concluído',
+                'description': 'Tarefa concluída',
+            },
+
             {
                 'id': uuid.UUID('b36f1443-9bdf-4484-aeb3-65fe51236d0c'),
                 'name': 'Cancelado',
@@ -29,6 +36,7 @@ async def lifespan(app: FastAPI):
             }
         ]
         for i in status_list:
+            # Using on_conflict_do_nothing so it can execute everytime even if the data already exists
             new_row = pg_insert(TaskStatusModel).values(i).on_conflict_do_nothing(index_elements=['id'])
             await session.execute(new_row)
         await session.commit()
