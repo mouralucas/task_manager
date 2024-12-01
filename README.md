@@ -27,27 +27,33 @@ docker-compose up
 ### Lista todos as tarefas:
 
 ```bash
-curl --location http://127.0.0.1:8000/task
+curl -X 'GET' \
+  'http://0.0.0.0:8000/task' \
+  -H 'accept: application/json'
 ```
 
 ### Criar uma nova tarefa:
 
 ```bash
-curl --location http://127.0.0.1:8000/task \
---header 'Content-Type: application/json' \
---data {
-    "date": "2024-12-01T08:00:00-03:00",
-    "description": "Essa é uma tarefa"
-}
+curl -X 'POST' \
+  'http://0.0.0.0:8000/task' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "date": "2024-12-05T13:06:16.774Z",
+  "description": "Outra Tarefa de teste"
+}'
 ```
 
 ### Concluir uma tarefa:
 
 ```bash
-curl --location --request PATCH 'http://127.0.0.1:8000/task/complete' \
---header 'Content-Type: application/json' \
---data '{
-    "taskId": "3ee208f4891c45aa9bb491874110ca32"
+curl -X 'PATCH' \
+  'http://0.0.0.0:8000/task/complete' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "taskId": "4ea1de05-743a-4218-bf4e-eaf90d602914"
 }'
 ```
 
@@ -57,10 +63,12 @@ O ID apresentado acima é apenas um exemplo
 
 ### Apagar uma tarefa:
 ```bash
-curl --location --request DELETE 'http://127.0.0.1:8000/task' \
---header 'Content-Type: application/json' \
---data '{
-    "taskId": "be3dd5fd017b4e52a3c70219c5a1e050"
+curl -X 'DELETE' \
+  'http://0.0.0.0:8000/task' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "taskId": "4ea1de05-743a-4218-bf4e-eaf90d602914"
 }'
 ```
 
