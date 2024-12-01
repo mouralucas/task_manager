@@ -8,6 +8,9 @@ Base = declarative_base()
 
 
 class TaskStatusModel(Base):
+    """
+    Model for task status.
+    """
     __tablename__ = 'task_status'
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
@@ -16,6 +19,9 @@ class TaskStatusModel(Base):
 
 
 class TaskModel(Base):
+    """
+    Model for tasks
+    """
     __tablename__ = 'task'
 
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)

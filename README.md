@@ -5,6 +5,10 @@ Contato: lucaspenha471@gmail.com
 
 Github: [@mouralucas](https://github.com/mouralucas)
 
+
+Aplicativo desenvolvido em FastAPI, bastante similar ao Flask. Utilizei esse framework 
+para usar das chamadas assíncronas nativas dele e da simplicidade de configuração.
+
 ## Requisitos mínimos
 
 1. [Docker](https://docs.docker.com/engine/install/)

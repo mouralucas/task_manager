@@ -26,6 +26,7 @@ async def complete_task(
 ) -> CompleteTaskResponse:
     return await TaskService(session=session).complete_task(task=task)
 
+
 @router.delete('', summary='Delete a task')
 async def delete_task(
         task: DeleteTaskRequest,
